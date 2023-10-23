@@ -40,7 +40,7 @@ else
 fi
 
 # Function to pull custom Components for any changed Superblocks application
-pull_commit_resource() {
+pull_and_commit() {
     local location="$1"
     if echo "$changed_files" | grep -q "^$location/"; then
         printf "\nChange detected. Pulling components for latest commit...\n"
@@ -63,5 +63,5 @@ pull_commit_resource() {
 # Check if any Superblocks applications have changed
 jq -r '.resources[] | select(.resourceType == "APPLICATION") | .location' "$CONFIG_PATH" | while read -r location; do
     printf "\nChecking %s for changes...\n" "$location"
-    pull_resource "$location"
+    pull_and_commit "$location"
 done
