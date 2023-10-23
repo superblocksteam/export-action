@@ -11,8 +11,8 @@ CLI_VERSION="$5"
 
 SUPERBLOCKS_BOT_NAME="superblocks-app[bot]"
 
-cd "$GITHUB_WORKSPACE"
-git config --global --add safe.directory "$GITHUB_WORKSPACE"
+cd "$REPO_DIR"
+git config --global --add safe.directory "$REPO_DIR"
 
 # Get the name of the actor who made the last commit
 actor_name=$(git show -s --format='%an' "$SHA")
@@ -35,7 +35,7 @@ if [ -n "$changed_files" ]; then
     superblocks config set domain "$DOMAIN"
     superblocks login -t "$TOKEN"
 else
-    echo "No files changed since the last commit. Skipping push..."
+    echo "No files changed since the last commit. Skipping pull..."
     exit 0
 fi
 
@@ -51,13 +51,8 @@ pull_and_commit() {
         if [ -n "$(git diff --name-only -- "$app_components_dir")" ]; then
             printf "\nComponents diff detected between local and remote components. Committing changes...\n"
 
-            if [ -z "$GIT_USER_NAME" ] || [ -z "$GIT_USER_EMAIL" ]; then
-                git config user.name "$SUPERBLOCKS_BOT_NAME"
-                git config user.email "${SUPERBLOCKS_BOT_NAME}@users.noreply.com"
-            else
-                git config user.name "$GIT_USER_NAME"
-                git config user.email "$GIT_USER_EMAIL"
-            fi
+            git config user.name "$SUPERBLOCKS_AUTHOR_NAME"
+            git config user.email "$SUPERBLOCKS_AUTHOR_EMAIL"
 
             git add "$app_components_dir"
             git commit -m "[ci] Pull components source code for '$location'" \

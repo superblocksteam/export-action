@@ -16,9 +16,6 @@ inputs:
   cli_version:
     description: 'The Superblocks CLI version'
     default: '^1.1.0'
-  actor_name:
-    description: 'Git actor name; defaults to `superblocks-app[bot]`'
-    default: 'superblocks-app[bot]'
 
 runs:
   using: 'docker'
@@ -30,5 +27,6 @@ runs:
     - ${{ inputs.path }}
     - ${{ inputs.cli_version }}
   env:
-    GIT_USER_NAME: ${{ inputs..actor_name }}
-    GIT_USER_EMAIL: ${{ inputs.actor_name }}@users.noreply.github.com
+    SUPERBLOCKS_AUTHOR_NAME: 'superblocks-app[bot]'
+    SUPERBLOCKS_AUTHOR_EMAIL: 'superblocks-app[bot]@users.noreply.github.com'
+    REPO_DIR: ${{ github.workspace }}
