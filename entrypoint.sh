@@ -10,8 +10,12 @@ CONFIG_PATH="$4"
 
 SUPERBLOCKS_BOT_NAME="superblocks-app[bot]"
 
-REPO_DIR=${REPO_DIR:-.}
-cd "$REPO_DIR"
+if [ -z "$REPO_DIR" ]; then
+  REPO_DIR="$(pwd)"
+else
+  cd "$REPO_DIR"
+fi
+
 git config --global --add safe.directory "$REPO_DIR"
 
 # Get the name of the actor who made the last commit
