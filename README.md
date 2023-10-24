@@ -52,7 +52,7 @@ If your organization uses Superblocks EU, set the `domain` to `eu.superblocks.co
       ...
 
       - name: Pull
-        uses: superblocksteam/export-action@v1
+        uses: superblocksteam/export-action
         id: pull
         with:
           token: ${{ secrets.SUPERBLOCKS_TOKEN }}
