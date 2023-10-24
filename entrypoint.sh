@@ -7,7 +7,6 @@ SHA="$1"
 TOKEN="$2"
 DOMAIN="$3"
 CONFIG_PATH="$4"
-CLI_VERSION="$5"
 
 SUPERBLOCKS_BOT_NAME="superblocks-app[bot]"
 
@@ -26,9 +25,6 @@ fi
 changed_files=$(git diff "${SHA}"^ --name-only)
 
 if [ -n "$changed_files" ]; then
-    # Install Superblocks CLI
-    printf "\nInstalling Superblocks CLI (%s)...\n" "$CLI_VERSION"
-    npm install -g @superblocksteam/cli@"$CLI_VERSION"
     superblocks --version
 
     # Login to Superblocks

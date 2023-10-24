@@ -13,9 +13,6 @@ inputs:
   path:
     description: 'The relative path to the Superblocks config file'
     default: '.superblocks/superblocks.json'
-  cli_version:
-    description: 'The Superblocks CLI version'
-    default: '^1.1.0'
 
 runs:
   using: 'docker'
@@ -25,7 +22,6 @@ runs:
     - ${{ inputs.token }}
     - ${{ inputs.domain }}
     - ${{ inputs.path }}
-    - ${{ inputs.cli_version }}
   env:
     SUPERBLOCKS_AUTHOR_NAME: 'superblocks-app[bot]'
     SUPERBLOCKS_AUTHOR_EMAIL: 'superblocks-app[bot]@users.noreply.github.com'
