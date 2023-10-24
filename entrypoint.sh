@@ -11,9 +11,6 @@ CLI_VERSION="$5"
 
 SUPERBLOCKS_BOT_NAME="superblocks-app[bot]"
 
-cd "$REPO_DIR"
-git config --global --add safe.directory "$REPO_DIR"
-
 # Get the name of the actor who made the last commit
 actor_name=$(git show -s --format='%an' "$SHA")
 if [ "$actor_name" != "$SUPERBLOCKS_BOT_NAME" ]; then
