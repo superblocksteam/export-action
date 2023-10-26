@@ -1,0 +1,37 @@
+name: Auto-update README.md based on action.yaml
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run auto-doc
+        uses: tj-actions/auto-doc@v3
+        with:
+          filename: 'action.yaml'
+          markdown_links: 'false'
+          col_max_words: '20'
+
+      - name: Verify changed files
+        uses: tj-actions/verify-changed-files@v16
+        id: verify-changed-files
+        with:
+          files: |
+            README.md
+
+      - name: Create pull request
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          base: 'main'
+          title: 'auto-doc: updated README.md'
+          branch: 'chore/auto-doc-update-readme'
+          commit-message: 'auto-doc: updated README.md'
+          body: 'auto-doc: updated README.md'
