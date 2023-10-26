@@ -63,13 +63,12 @@ If your organization uses Superblocks EU, set the `domain` to `eu.superblocks.co
 
 <!-- AUTO-DOC-INPUT:START - Do not remove or modify this section -->
 
-|    INPUT    |  TYPE  | REQUIRED |              DEFAULT              |                     DESCRIPTION                      |
-|-------------|--------|----------|-----------------------------------|------------------------------------------------------|
-| cli_version | string |  false   |            `"^1.1.0"`             |             The Superblocks CLI version              |
-|   domain    | string |  false   |      `"app.superblocks.com"`      | The Superblocks domain where applications are hosted |
-|    path     | string |  false   | `".superblocks/superblocks.json"` |   The relative path to the Superblocks config file   |
-|     sha     | string |  false   |             `"HEAD"`              |              Commit to pull changes for              |
-|    token    | string |   true   |                                   |         The Superblocks access token to use          |
+| INPUT  |  TYPE  | REQUIRED |              DEFAULT              |                     DESCRIPTION                      |
+|--------|--------|----------|-----------------------------------|------------------------------------------------------|
+| domain | string |  false   |      `"app.superblocks.com"`      | The Superblocks domain where applications are hosted |
+|  path  | string |  false   | `".superblocks/superblocks.json"` |   The relative path to the Superblocks config file   |
+|  sha   | string |  false   |             `"HEAD"`              |              Commit to pull changes for              |
+| token  | string |   true   |                                   |         The Superblocks access token to use          |
 
 <!-- AUTO-DOC-INPUT:END -->
 
