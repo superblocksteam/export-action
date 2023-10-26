@@ -8,7 +8,9 @@ TOKEN="$2"
 DOMAIN="$3"
 CONFIG_PATH="$4"
 
-SUPERBLOCKS_BOT_NAME="superblocks-app[bot]"
+SUPERBLOCKS_AUTHOR_NAME="${SUPERBLOCKS_AUTHOR_NAME:-superblocks-app[bot]}"
+SUPERBLOCKS_AUTHOR_EMAIL="${SUPERBLOCKS_AUTHOR_EMAIL:-142439023+superblocks-app[bot]@users.noreply.github.com}"
+SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER="${SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER:-[superblocks ci]}"
 
 if [ -z "$REPO_DIR" ]; then
   REPO_DIR="$(pwd)"
@@ -18,9 +20,13 @@ fi
 
 git config --global --add safe.directory "$REPO_DIR"
 
-# Get the name of the actor who made the last commit
+# Get the actor name and commit message the last commit
 actor_name=$(git show -s --format='%an' "$SHA")
-if [ "$actor_name" != "$SUPERBLOCKS_BOT_NAME" ]; then
+commit_message=$(git show -s --format='%B' "$SHA")
+
+# Skip pull if the commit was not made by Superblocks. To support multiple Git providers, we also
+# check for the commit message identifier used to identify Superblocks commits.
+if [ "$actor_name" != "$SUPERBLOCKS_AUTHOR_NAME" ] && ! echo "$commit_message" | grep -qF "$SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER" ; then
     printf "\nCommit was not made by Superblocks. Skipping components pull...\n"
     exit 0
 fi

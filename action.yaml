@@ -25,3 +25,4 @@ runs:
   env:
     SUPERBLOCKS_AUTHOR_NAME: 'superblocks-app[bot]'
     SUPERBLOCKS_AUTHOR_EMAIL: '142439023+superblocks-app[bot]@users.noreply.github.com'
+    SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER: '[superblocks ci]'
