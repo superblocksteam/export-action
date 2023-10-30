@@ -1,9 +1,6 @@
 name: 'Superblocks Export'
 description: 'Pull application-specific components source code from Superblocks'
 inputs:
-  sha:
-    description: 'Commit to pull changes for'
-    default: 'HEAD'
   token:
     description: 'The Superblocks access token to use'
     required: true
@@ -13,16 +10,18 @@ inputs:
   path:
     description: 'The relative path to the Superblocks config file'
     default: '.superblocks/superblocks.json'
+  sha:
+    description: 'Commit to pull changes for'
+    default: 'HEAD'
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.sha }}
-    - ${{ inputs.token }}
-    - ${{ inputs.domain }}
-    - ${{ inputs.path }}
   env:
     SUPERBLOCKS_AUTHOR_NAME: 'superblocks-app[bot]'
     SUPERBLOCKS_AUTHOR_EMAIL: '142439023+superblocks-app[bot]@users.noreply.github.com'
     SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER: '[superblocks ci]'
+    SUPERBLOCKS_TOKEN: ${{ inputs.token }}
+    SUPERBLOCKS_DOMAIN: ${{ inputs.domain }}
+    SUPERBLOCKS_CONFIG_PATH: ${{ inputs.path }}
+    SUPERBLOCKS_COMMIT_SHA: ${{ inputs.sha }}
