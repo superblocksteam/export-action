@@ -12,7 +12,7 @@ SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER="${SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER:-
 
 # Ensure that a Superblocks token is provided
 if [ -z "$SUPERBLOCKS_TOKEN" ]; then
-  echo "The 'SUPERBLOCKS_TOKEN' environment variable is unset or empty. Exiting..."
+  printf "\nThe 'SUPERBLOCKS_TOKEN' environment variable is unset or empty. Exiting...\n"
   exit 1
 fi
 
@@ -46,7 +46,7 @@ if [ -n "$changed_files" ]; then
     superblocks config set domain "$SUPERBLOCKS_DOMAIN"
     superblocks login -t "$SUPERBLOCKS_TOKEN"
 else
-    echo "No files changed since the last commit. Skipping pull..."
+    printf "\nNo files changed since the last commit. Skipping pull...\n"
     exit 0
 fi
 
@@ -72,6 +72,8 @@ pull_and_commit() {
         else
             printf "\nNo components diff detected. Skipping commit...\n"
         fi
+    else
+        printf "\nNo change detected. Skipping pull...\n"
     fi
 }
 
