@@ -36,7 +36,7 @@ if [ "$actor_name" != "$SUPERBLOCKS_AUTHOR_NAME" ] && ! echo "$commit_message" |
 fi
 
 # Get the list of changed files in the last commit
-changed_files=$(git diff "${SHA}"^ --name-only)
+changed_files=$(git diff "${COMMIT_SHA}"^ --name-only)
 
 if [ -n "$changed_files" ]; then
     superblocks --version
