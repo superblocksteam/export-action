@@ -80,3 +80,5 @@ jq -r '.resources[] | select(.resourceType == "APPLICATION") | .location' "$SUPE
     printf "\nChecking %s for changes...\n" "$location"
     pull_and_commit "$location"
 done
+
+printf "\nChecking complete. Exiting...\n"
