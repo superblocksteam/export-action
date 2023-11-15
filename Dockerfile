@@ -1,6 +1,6 @@
 FROM node:18-bookworm-slim
 
-ARG SUPERBLOCKS_CLI_VERSION='^1.1.0'
+ARG SUPERBLOCKS_CLI_VERSION='^1.3.0'
 
 # Install Superblocks CLI dependencies
 RUN apt-get update && apt-get install -y \
