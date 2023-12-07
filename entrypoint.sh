@@ -64,7 +64,11 @@ fi
 # Function to pull custom Components for any changed Superblocks application
 pull_and_commit() {
     local location="$1"
-    if echo "$changed_files" | grep -q "^$location/"; then
+
+    # Escape any special characters in the resource subdir
+    escaped_location="${location%%/*}/$(printf '%s\n' "${location#*/}" | sed 's/[][\\^$.|?*+(){}/]/\\&/g')"
+
+    if echo "$changed_files" | grep -q "^${escaped_location}/"; then
         printf "\nChange detected. Pulling components for latest commit...\n"
         superblocks pull "$location" -m "most-recent-commit"
 
