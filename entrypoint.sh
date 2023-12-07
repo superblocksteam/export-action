@@ -3,6 +3,8 @@
 set -e
 set -o pipefail
 
+readonly SUPERBLOCKS_CLI_VERSION='^1.4.0'
+
 COMMIT_SHA="${COMMIT_SHA:-HEAD}"
 SUPERBLOCKS_DOMAIN="${SUPERBLOCKS_DOMAIN:-app.superblocks.com}"
 SUPERBLOCKS_CONFIG_PATH="${SUPERBLOCKS_CONFIG_PATH:-.superblocks/superblocks.json}"
@@ -50,6 +52,9 @@ fi
 changed_files=$(git diff "${COMMIT_SHA}"^ --name-only)
 
 if [ -n "$changed_files" ]; then
+    # Install Superblocks CLI
+    npm install -g @superblocksteam/cli@"${SUPERBLOCKS_CLI_VERSION}"
+
     superblocks --version
 
     # Login to Superblocks
