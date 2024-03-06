@@ -7,8 +7,10 @@ readonly SUPERBLOCKS_CLI_VERSION='^1.4.0'
 
 COMMIT_SHA="${COMMIT_SHA:-HEAD}"
 SUPERBLOCKS_DOMAIN="${SUPERBLOCKS_DOMAIN:-app.superblocks.com}"
-SUPERBLOCKS_CONFIG_PATH="${SUPERBLOCKS_CONFIG_PATH:-.superblocks/superblocks.json}"
 SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER="${SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER:-[superblocks ci]}"
+SUPERBLOCKS_PATH="${SUPERBLOCKS_PATH:-.}"
+
+SUPERBLOCKS_CONFIG_RELATIVE_PATH=".superblocks/superblocks.json"
 
 # GitHub Actions default environment variables: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
 if [ "$GITHUB_ACTIONS" == "true" ]; then
@@ -49,7 +51,10 @@ if [ "$actor_name" != "$SUPERBLOCKS_AUTHOR_NAME" ] && ! echo "$commit_message" |
 fi
 
 # Get the list of changed files in the last commit
-changed_files=$(git diff "${COMMIT_SHA}"^ --name-only)
+changed_files=$(git diff "${COMMIT_SHA}"^ --name-only -- "$SUPERBLOCKS_PATH")
+
+# Change the working directory to the Superblocks path
+pushd "$SUPERBLOCKS_PATH"
 
 if [ -n "$changed_files" ]; then
     # Install Superblocks CLI
@@ -103,7 +108,7 @@ pull_and_commit() {
 }
 
 # Check if any Superblocks applications have changed
-jq -r '.resources[] | select(.resourceType == "APPLICATION") | .location' "$SUPERBLOCKS_CONFIG_PATH" | while read -r location; do
+jq -r '.resources[] | select(.resourceType == "APPLICATION") | .location' "$SUPERBLOCKS_CONFIG_RELATIVE_PATH" | while read -r location; do
     printf "\nChecking %s for changes...\n" "$location"
     pull_and_commit "$location"
 done

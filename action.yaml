@@ -8,8 +8,8 @@ inputs:
     description: 'The Superblocks domain where applications are hosted'
     default: 'app.superblocks.com'
   path:
-    description: 'The relative path to the Superblocks config file'
-    default: '.superblocks/superblocks.json'
+    description: 'The relative path from repo root to the Superblocks root directory. This is where the ~.superblocks/superblocks.json config file is located.'
+    default: '.'
   sha:
     description: 'Commit to pull changes for'
     default: 'HEAD'
@@ -23,5 +23,5 @@ runs:
     SUPERBLOCKS_COMMIT_MESSAGE_IDENTIFIER: '[superblocks ci]'
     SUPERBLOCKS_TOKEN: ${{ inputs.token }}
     SUPERBLOCKS_DOMAIN: ${{ inputs.domain }}
-    SUPERBLOCKS_CONFIG_PATH: ${{ inputs.path }}
+    SUPERBLOCKS_PATH: ${{ inputs.path }}
     SUPERBLOCKS_COMMIT_SHA: ${{ inputs.sha }}
