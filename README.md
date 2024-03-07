@@ -63,12 +63,12 @@ If your organization uses Superblocks EU, set the `domain` to `eu.superblocks.co
 
 <!-- AUTO-DOC-INPUT:START - Do not remove or modify this section -->
 
-| INPUT  |  TYPE  | REQUIRED |              DEFAULT              |                     DESCRIPTION                      |
-|--------|--------|----------|-----------------------------------|------------------------------------------------------|
-| domain | string |  false   |      `"app.superblocks.com"`      | The Superblocks domain where applications are hosted |
-|  path  | string |  false   | `".superblocks/superblocks.json"` |   The relative path to the Superblocks config file   |
-|  sha   | string |  false   |             `"HEAD"`              |              Commit to pull changes for              |
-| token  | string |   true   |                                   |         The Superblocks access token to use          |
+| INPUT  |  TYPE  | REQUIRED |         DEFAULT         |                                                                 DESCRIPTION                                                                  |
+|--------|--------|----------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| domain | string |  false   | `"app.superblocks.com"` |                                             The Superblocks domain where applications are hosted                                             |
+|  path  | string |  false   |          `"."`          | The relative path from repo root to the Superblocks root directory. This is where the ~.superblocks/superblocks.json config file is located. |
+|  sha   | string |  false   |        `"HEAD"`         |                                                          Commit to pull changes for                                                          |
+| token  | string |   true   |                         |                                                     The Superblocks access token to use                                                      |
 
 <!-- AUTO-DOC-INPUT:END -->
 
