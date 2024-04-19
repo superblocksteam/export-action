@@ -78,7 +78,7 @@ pull_and_commit() {
     # Escape any special characters in the resource subdir
     escaped_location="${location%%/*}/$(printf '%s\n' "${location#*/}" | sed 's/[][\\^$.|?*+(){}/]/\\&/g')"
 
-    if echo "$changed_files" | grep -q "^${escaped_location}/"; then
+    if echo "$changed_files" | grep -q "${escaped_location}/"; then
         printf "\nChange detected. Pulling components for latest commit...\n"
         superblocks pull "$location" -m "most-recent-commit"
 
