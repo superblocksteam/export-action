@@ -1,4 +1,4 @@
-FROM node:18-bookworm-slim
+FROM node:20-bookworm-slim
 
 # Install Superblocks CLI dependencies
 RUN apt-get update && apt-get install -y \
